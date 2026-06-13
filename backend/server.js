@@ -9,7 +9,7 @@ app.set('trust proxy', 1)
 const PORT = 3001
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://blackjack-ai-dealer.vercel.app",
     credentials: true
 }))
 
