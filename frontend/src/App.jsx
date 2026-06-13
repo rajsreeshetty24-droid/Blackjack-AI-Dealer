@@ -15,7 +15,7 @@ function App() {
 
   const sendMessage = async (message) => {
     setIsloading(true)
-    const data = await fetch("http://localhost:3001/api/agent/message", {
+    const data = await fetch("https://blackjack-ai-dealer.onrender.com/api/agent/message", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
