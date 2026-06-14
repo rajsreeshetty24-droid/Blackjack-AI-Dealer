@@ -20,7 +20,7 @@ app.use(express.json())
 app.use(session({
     secret: 'blackjack',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         secure: true , 
         sameSite: 'none'
