@@ -13,10 +13,10 @@ app.set('trust proxy', 1)
 const PORT = 3001
 
 const redis = createClient({
-    url: process.env.REIS_URL
+    url: process.env.REDIS_URL
 })
 
-await redis.connect().catch(console.error());
+redis.connect().catch(console.error());
 
 redis.on('error' , (err)=> console.log("Redis error:" , err))
 redis.on('connect' , ()=> {console.log("Redis connected")})
