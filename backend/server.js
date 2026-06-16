@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser"
 
 process.on('warning', e => console.warn(e.stack));
 
+const port = process.env.PORT
 
 const app = express()
 app.set("trust proxy" , 1)
@@ -24,33 +25,37 @@ const redis = createClient({
     url: process.env.REDIS_URL
 })
 
-redis.connect().catch(console.error());
-
 redis.on('error' , (err)=> console.log("Redis error:" , err))
-redis.on('connect' , ()=> {console.log("Redis connected")})
 
+async function startServer() {
+    await redis.connect()
+    console.log("Redis connected")
 
+    app.use(session({
+        store: new RedisStore({ client: redis }),
+        secret: process.env.SECRET_KEY,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 1000 * 60,
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none'
+        }
+    }))
 
+    app.use("/api/agent", agentRoute)
 
+    app.listen(port, () => {
+        console.log(`The server is running on http://localhost:${port}`)
+    })
 
-app.use(session({
-    store : new RedisStore({client: redis}),
-    secret: process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        maxAge: 1000*60,
-        httpOnly: true,
-        secure: true , 
-        sameSite: 'none'
-    }
-}))
+}
 
 // app.use("/api/game" , gameRoutes)
-app.use("/api/agent" , agentRoute)
 
-const port = process.env.PORT
 
-app.listen(port, () => {
-    console.log(`The server is running on http://localhost:${port}`)
-})
+startServer().catch(console.error)
+
+
+
