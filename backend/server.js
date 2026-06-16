@@ -48,7 +48,7 @@ app.use(session({
 // app.use("/api/game" , gameRoutes)
 app.use("/api/agent" , agentRoute)
 
-port = process.env.PORT
+const port = process.env.PORT
 
 app.listen(port, () => {
     console.log(`The server is running on http://localhost:${PORT}`)
