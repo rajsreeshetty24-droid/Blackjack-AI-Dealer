@@ -14,7 +14,7 @@ agent_router.post("/message" , async (req , res) => {
     const result = await runAgent(message , req.session.game)
     req.session.game = result.gameState
 
-    console.log(res.json(req.session))
+    // console.log(res.json(req.session))
 
     res.json({
         dealerMessage: result.dealerMessage,
