@@ -12,8 +12,7 @@ agent_router.post("/message" , async (req , res) => {
     const {message} = req.body
 
     const result = await runAgent(message , req.session.game)
-    req.session.game = result.gameState
-    
+
     console.log('Game state keys:', Object.keys(req.session.game));
     console.log('Shoe card count:', req.session.game?.shoe?.cards?.length);
 
