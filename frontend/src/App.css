@@ -1,0 +1,9 @@
+.card-inner img {
+    width: 120px;
+    height: auto;
+    transition: transform 0.25s ease;
+}
+
+.card-inner img:hover {
+    transform: translateY(-10px);
+}

@@ -1,0 +1,13 @@
+.card-inner {
+    transform-origin: center center;
+}
+
+.card-inner img {
+    width: 120px;
+    transition: transform .2s ease;
+}
+
+.card-inner:hover {
+    transform: translateY(-12px);
+    z-index: 10;
+}

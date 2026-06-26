@@ -1,40 +1,31 @@
-import {getCard} from "../utils/getCard.js"
+import { motion } from "framer-motion";
+import { getCard } from "../utils/getCard.js";
 
-
-export default function Card({card}) {
-
-
-    // const handleClick = () => {
-    //     if (onClick) onClick()
-    // }
-
-    return(
-
-        <div className="card-inner">
-            <img src={getCard(card)} alt={card} />
-        </div>
-    )
+export default function Card({ card, index = 0, owner = "player" }) {
+  return (
+    <motion.div
+      className="card-inner"
+      initial={{
+        opacity: 0,
+        scale: 0.2,
+        x: owner === "dealer" ? 250 : -250,
+        y: -100,
+        rotate: owner === "dealer" ? 20 : -20,
+      }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+        x: 0,
+        y: 0,
+        rotate: 0,
+      }}
+      transition={{
+        delay: index * 0.15,
+        duration: 0.5,
+        ease: "easeOut",
+      }}
+    >
+      <img src={getCard(card)} alt="card" />
+    </motion.div>
+  );
 }
-
-
-// import { useState, useEffect } from "react"
-// import { getCard } from "../utils/getCard.js"
-
-// export default function Card({ card, revealOn, gameStatus }) {
-//     const [revealed, setRevealed] = useState(!revealOn) // if revealOn exists, start face down
-
-//     useEffect(() => {
-//         if (revealOn && gameStatus === revealOn) {
-//             setRevealed(true)
-//         }
-//     }, [gameStatus, revealOn])
-
-//     return (
-//         <div className="card-inner">
-//             {revealed
-//                 ? <img src={getCard(card)} alt={card} />
-//                 : <img src="/assets/reverse_green.svg" alt="card-back" />
-//             }
-//         </div>
-//     )
-// }

@@ -32,49 +32,55 @@ function App() {
 
 
   return (
-    <div className="p-8 relative">
+    <div className="h-screen overflow-hidden bg-green-900 text-white p-8 relative">
+      <div className="flex justify-center mb-10">
+    <div className="flex flex-col items-center gap-4">
 
-      <div className="flex items-start gap-4 mb-8 ml-4">
-        <Avatar className="size-24 shrink-0">
-          <AvatarImage src="/dealer.png" alt="Dealer" />
-          <AvatarFallback>CN</AvatarFallback>
+        <Avatar className="size-24">
+            <AvatarImage src="/dealer.png" alt="Dealer" />
+            <AvatarFallback>CN</AvatarFallback>
         </Avatar>
 
-        <div className='flex-1'>
-          {isloading ? (
-            <div className='inline-flex rounded-xl border bg-background px-4 py-2'>
-              <TypingIndicator />
+        {isloading ? (
+            <div className="rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 px-6 py-3">
+                <TypingIndicator />
             </div>
-          ) : (
-            <div className='inline-block max-w-4xl rounded-xl border bg-background px-4 py-3'>
-              <p className="text-lg text-muted-foreground select-none">
-                {dealerMessage}
-              </p>
+        ) : (
+            <div className="rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 px-6 py-3 max-w-3xl">
+                <p className="text-lg text-white text-center">
+                    {dealerMessage}
+                </p>
             </div>
-          )}
-        </div>
-      </div>
+        )}
+
+    </div>
+</div>
 
       {/* {isloading && <p className="mt-6 border-l-2 pl-6 italic">Dealer action in progress...</p>} */}
 
-      <div className='flex gap-8'>
-        <div className='flex-1 ml-8 flex flex-col gap-10 select-none'>
-          <DealerHandArea dealercards={gameState?.dealerHand} />
-          <PlayerHandArea playercards={gameState?.playerHand} />
-        </div>
-
-        <div className='flex flex-col items-end gap-10 mr-8 select-none'>
-
-          <Deck className="w-45" />
-
-          <div className='flex flex-col gap-3 w-48'>
-            <Button className="w-full text-xl" disabled = {isloading} onClick={() => sendMessage("Start a new game")}>Start</Button>
-            <Button className="w-full text-xl" disabled = {isloading} onClick={() => sendMessage("Hit")}>Hit</Button>
-            <Button className="w-full text-xl" disabled = {isloading} onClick={() => sendMessage("Double Down")}>Double Down</Button>
-            <Button className="w-full text-xl" disabled = {isloading} onClick={() => sendMessage("stand")}>Stand</Button>
+        <div className="flex items-center justify-center gap-24 mt-16">
+  
+          <div className="flex flex-col items-center">
+            <h2 className="text-2xl font-bold mb-6">DEALER</h2>
+            <DealerHandArea dealercards={gameState?.dealerHand} />
           </div>
 
+          <div className="flex flex-col items-center">
+            <h1 className="text-xl font-bold mb-6">DECK</h1>
+            <Deck className="w-30" />
+          </div>
+
+          <div className="flex flex-col items-center">
+            <h2 className="text-2xl font-bold mb-6">PLAYER</h2>
+           <PlayerHandArea playercards={gameState?.playerHand} />
+          </div>
         </div>
+
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex gap-4">
+            <Button className="px-8 py-6 rounded-full text-lg shadow-lg hover:scale-105 transition" disabled = {isloading} onClick={() => sendMessage("Start a new game")}>Start</Button>
+            <Button className="px-8 py-6 rounded-full text-lg shadow-lg hover:scale-105 transition" disabled = {isloading} onClick={() => sendMessage("Hit")}>Hit</Button>
+            <Button className="px-8 py-6 rounded-full text-lg shadow-lg hover:scale-105 transition" disabled = {isloading} onClick={() => sendMessage("Double Down")}>Double Down</Button>
+            <Button className="px-8 py-6 rounded-full text-lg shadow-lg hover:scale-105 transition" disabled = {isloading} onClick={() => sendMessage("stand")}>Stand</Button>
       </div>
     </div>
 

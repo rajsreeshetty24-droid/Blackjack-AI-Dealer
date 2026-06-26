@@ -1,6 +1,43 @@
-.player-area{
+.player-area {
     display: flex;
     flex-direction: row;
     gap: 20px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+}
+.player-area,
+.dealer-area {
+    display: flex;
+    align-items: center;
+}
+
+.player-area > *,
+.dealer-area > * {
+    margin-left: -45px;
+    transition: transform .2s ease;
+}
+
+.player-area > *:first-child,
+.dealer-area > *:first-child {
+    margin-left: 0;
+}
+
+.player-area > *:hover,
+.dealer-area > *:hover {
+    transform: translateY(-12px);
+    z-index: 5;
+}
+.player-area,
+.dealer-area {
+    display: flex;
+    gap: 0;
+}
+
+.player-area > *,
+.dealer-area > * {
+    margin-left: -50px;
+}
+
+.player-area > *:first-child,
+.dealer-area > *:first-child {
+    margin-left: 0;
 }
